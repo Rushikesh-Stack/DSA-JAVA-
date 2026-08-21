@@ -1,33 +1,47 @@
 class Solution {
-    public List<List<Integer>> generate(int numRows) {
 
-        List<List<Integer>> ans = new ArrayList<>();
+//     List<List<Integer>> a
 
-        for(int i = 0; i < numRows; i++)
+// [
+//  [1],           → Row 1
+//  [1, 1],        → Row 2
+//  [1, 2, 1],     → Row 3
+//  [1, 3, 3, 1]   → Row 4
+// ]
+    
+    public List<List<Integer>> generate(int n) {
+
+        List<List<Integer>> a=new  ArrayList<>();
+        for(int i=0;i<n;i++)
         {
-            List<Integer> row = new ArrayList<>();
+            List<Integer> row=new ArrayList<>();
+            int left=0;
+            int right=1;
 
-            // First element
-            row.add(1);
-
-            // Middle elements
-            for(int j = 1; j < i; j++)
+            for(int j=0;j<=i;j++)
             {
-                int value = ans.get(i - 1).get(j - 1)
-                           + ans.get(i - 1).get(j);
+                if(j==0)
+                {
+                    row.add(1);
+                }
+                else if(j==i)
+                {
+                    row.add(1);
+                }
+                else{
+                    int value=a.get(i-1).get(left)+a.get(i-1).get(right);
 
-                row.add(value);
+                    row.add(value);
+
+                    right++;
+                    left++;
+                }
+
             }
-
-            // Last element
-            if(i > 0)
-            {
-                row.add(1);
-            }
-
-            ans.add(row);
+            a.add(row);
         }
 
-        return ans;
+        return a;
+
     }
 }
