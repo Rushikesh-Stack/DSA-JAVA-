@@ -1,32 +1,72 @@
-class Solution {
-    public List<Integer> majorityElement(int[] a) {
+    class Solution {
+        public List<Integer> majorityElement(int[] a) {
 
+        List<Integer>list=new ArrayList<>();
         int n=a.length;
-    List<Integer>list=new ArrayList<>();
-    HashMap<Integer,Integer> map=new HashMap<>();
-    int count=0;
 
-    for(int i=0;i<n;i++)
-    {
-        if(!map.containsKey(a[i]))
+        int ele1=0;
+        int ele2=0;
+        int cnt1=0;
+        int cnt2=0;
+
+        //    It tries to find the only possible elements that could be majority elements.
+        //    For n/3, there can be at most 2 majority elements.
+        for(int i=0;i<n;i++)
         {
-            map.put(a[i],count=1);
+            if(cnt1==0 && a[i]!=ele2)
+            {
+                ele1=a[i];
+                cnt1++;
+            }
+            else if(cnt2==0 && a[i]!=ele1)
+            {
+                ele2=a[i];
+                cnt2++;
+            }
+            else if(ele1==a[i])
+            {
+                cnt1++;
+            }
+            else if(ele2==a[i])
+            {
+                cnt2++;
+            }
+            else{
+                cnt1--;
+                cnt2--;
+
+            }
         }
-        else {
-            int oldCnt=map.get(a[i]);
-            int newCnt=oldCnt+1;
-            map.put(a[i],newCnt);
+
+        int count1=0;
+        int count2=0;
+        for(int i=0;i<n;i++)
+        {
+            if(ele1==a[i])
+            {
+                count1++;
+            }
+            if(ele2==a[i])
+            {
+                count2++;
+            }
+          if(count1>n/3 && !list.contains(ele1))
+              {
+                list.add(a[i]);
+              }
+
+         if(count2>n/3 && !list.contains(ele2))
+              {
+                list.add(a[i]);
+              }
+
+        }
+
+      
+
+
+
+        return list;
             
         }
-
-        int current=map.get(a[i]);
-        if(current>n/3 && !list.contains(a[i]))
-        {
-            list.add(a[i]);
-        }
     }
-
-      return list;
-        
-    }
-}
