@@ -24,7 +24,7 @@ class Solution {
             else if(maxcnt==cnt)
             {
                 //compare prevoius element with current element
-                if(a[i]<ans)
+                if(a[i]<ans) //curr<previous
                 {
                     ans=a[i]; //store smallest element
                 }
