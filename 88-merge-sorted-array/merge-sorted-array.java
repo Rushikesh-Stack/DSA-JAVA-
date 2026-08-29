@@ -1,38 +1,43 @@
 class Solution {
     public void merge(int[] a1, int m, int[] a2, int n) {
+        
+        int n1=a1.length;
 
-        // If a2 is empty, nothing to merge
+        int i=m-1;
+        int j=n-1;
+        int k=m+n-1; //actual element + n element
+
         if(n == 0)
             return;
 
-        // Compare elements of a1 with the smallest element of a2
-        for(int i = 0; i < m; i++)
+        while(i>=0 && j>=0)
         {
-            if(a1[i] > a2[0])
+            if(a1[i]<a2[j])
             {
-                // Swap
-                int temp = a1[i];
-                a1[i] = a2[0];
-                a2[0] = temp;
-
-                // Restore sorted order of a2
-                int j = 0;
-
-                while(j < n - 1 && a2[j] > a2[j + 1])
-                {
-                    int temp2 = a2[j];
-                    a2[j] = a2[j + 1];
-                    a2[j + 1] = temp2;
-
-                    j++;
-                }
+                a1[k]=a2[j];
+                j--;
+                k--;
+            }
+            else{
+                a1[k]=a1[i];
+                 i--;
+                  k--;
+                
             }
         }
 
-        // Copy a2 into the empty space of a1
-        for(int i = 0; i < n; i++)
-        {
-            a1[m + i] = a2[i];
-        }
+          while(j >= 0)
+            {
+                a1[k] = a2[j];
+                j--;
+                 k--;
+           }
+
+
+
+
+        
+      
+        
     }
 }
