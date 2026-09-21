@@ -7,10 +7,10 @@ class Solution {
         for(int i=0;i<n;i++)
         {
             sum+=a[i];
-            arr[i]=sum;
+            a[i]=sum;
              
         }
 
-        return arr;
+        return a;
     }
 }
