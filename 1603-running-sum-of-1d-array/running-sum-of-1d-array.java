@@ -10,7 +10,7 @@ class Solution {
             for(int j=0;j<=i;j++)
             {
                 sum=sum+a[j];
-                arr[j]=sum;
+                arr[i]=sum;
             }
              
         }
