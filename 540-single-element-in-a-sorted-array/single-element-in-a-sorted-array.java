@@ -6,22 +6,42 @@ class Solution {
         if(n == 1)
             return a[0];
 
-        for(int i = 0; i < n; i++)
+        int low = 1;
+        int high = n - 2;
+
+        if(a[0] != a[1])
+            return a[0];
+
+        if(a[n - 1] != a[n - 2])
+            return a[n - 1];
+
+        while(low <= high)
         {
-            if(i == 0)
+            int mid = (low + high) / 2;
+
+            // mid itself is single
+            if(a[mid] != a[mid - 1] &&
+               a[mid] != a[mid + 1])
             {
-                if(a[i] != a[i + 1])
-                    return a[i];
+                return a[mid];
             }
-            else if(i == n - 1)
+
+            // mid is paired with left
+            if(a[mid] == a[mid - 1])
             {
-                if(a[i] != a[i - 1])
-                    return a[i];
+                if(mid % 2 == 1)
+                    low = mid + 1;
+                else
+                    high = mid - 1;
             }
-            else
+
+            // mid is paired with right
+            else if(a[mid] == a[mid + 1])
             {
-                if(a[i] != a[i - 1] && a[i] != a[i + 1])
-                    return a[i];
+                if(mid % 2 == 0)
+                    low = mid + 1;
+                else
+                    high = mid - 1;
             }
         }
 
