@@ -20,7 +20,9 @@ class Solution {
 
             for(int i = 0; i < piles.length; i++)
             {
-                hrs += (piles[i] + mid - 1) / mid;
+                // hrs += (piles[i] + mid - 1) / mid;
+                 hrs += (int)Math.ceil((double)piles[i] / mid);
+
             }
 
             if(hrs <= h)
