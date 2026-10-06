@@ -3,54 +3,58 @@ class Solution {
     {
         int n = bloomDay.length;
 
-        // Find the maximum number of days any flower takes to bloom
         int max = 0;
+        int ans=-1;
 
         for(int i : bloomDay)
         {
             max = Math.max(i, max);
         }
 
-        int low=0;
-        int high=max;
-        int ans=-1;
+        int low = 1;
+        int high = max;
 
-        while(low<=high)
+        while(low <= high)
         {
-            int mid=low+(high-low)/2;
-            int flower=0;
-            int bonquet=0;
+            int mid = low + (high - low) / 2;
 
-            for(int i=0;i<n;i++)
+            int flower = 0;
+            int bouquet = 0;
+
+            // Check all flowers for this particular day
+            for(int i = 0; i < n; i++)
             {
-                if(bloomDay[i]<=mid)
+                if(bloomDay[i] <= mid)
                 {
                     flower++;
 
-                    if(flower==k)
+                    if(flower == k)
                     {
-                        bonquet++;
-
-                        flower=0;
+                        bouquet++;
+                        flower = 0;
                     }
                 }
-                else{
-                    flower=0;
+                else
+                {
+                    // Sequence is broken
+                    flower = 0;
                 }
             }
 
-            if(bonquet>=m)
+            // Now decide the Binary Search direction
+            if(bouquet >= m)
             {
                 ans=mid;
-                high=mid-1;
+                // mid works, try fewer days
+                high = mid - 1;
             }
-            else{
-                low=mid+1;
+            else
+            {
+                // mid doesn't work, need more days
+                low = mid + 1;
             }
-            
         }
 
-        // Impossible to make m bouquets
         return ans;
     }
 }
