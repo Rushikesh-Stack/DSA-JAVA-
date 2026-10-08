@@ -2,38 +2,29 @@ class Solution {
     public int findKthPositive(int[] arr, int k) 
     {
         int n=arr.length;
-        int cnt=0;
-        boolean found=false;
 
-        int max=0;
-        for(int i:arr)
+        int low=0;
+        int high=n-1;
+
+        while(low<=high)
         {
-            max=Math.max(i,max);
-        }
+            int mid=low+(high-low)/2;
 
-        for(int i=1;i<=max+k;i++)
-        {
-            found=false;
-            for(int num=0;num<n;num++)
-            {
-                if(arr[num]==i)
-                {
-                    found=true;
-                    break;
-                }
-            }
+            // Number of missing elements before arr[mid]
+            int missing=arr[mid]-(mid+1);
 
-            if(!found)
+            if(missing<k)
             {
-                cnt++;
+                // Need more missing numbers
+                low=mid+1;
             }
-            
-            if(cnt==k)
+            else
             {
-                return i;
+                // k-th missing number is on the left
+                high=mid-1;
             }
         }
 
-        return -1;
+        return low+k;
     }
 }
