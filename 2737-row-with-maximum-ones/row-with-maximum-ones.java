@@ -18,7 +18,7 @@ class Solution {
                     cnt++;
                 }
             }
-            if(cnt>max)
+            if(cnt>max)//For smaller idx if 7>7 then idx not updates its point to its minimin idx
             {
                 max=cnt;
                 idx=i;
