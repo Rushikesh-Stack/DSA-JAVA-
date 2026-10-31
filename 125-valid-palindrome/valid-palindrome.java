@@ -1,41 +1,35 @@
 class Solution {
-    public boolean isPalindrome(String s) 
-    {
-        int n=s.length();
+    public boolean isPalindrome(String s) {
 
-        String s1=s.toLowerCase();
+        int low = 0;
+        int high = s.length() - 1;
 
-        StringBuilder sb=new StringBuilder();
+        while (low < high) {
 
-        for(int i=0;i<n;i++)
-        {
-            char ch=s1.charAt(i);
-            if(Character.isLetterOrDigit(ch))
-            {
-                sb.append(ch);
+            // Skip special characters from left
+            if (!Character.isLetterOrDigit(s.charAt(low))) {
+                low++;
+            }
+
+            // Skip special characters from right
+            else if (!Character.isLetterOrDigit(s.charAt(high))) {
+                high--;
+            }
+
+            // Compare characters
+            else {
+                char ch1 = Character.toLowerCase(s.charAt(low));
+                char ch2 = Character.toLowerCase(s.charAt(high));
+
+                if (ch1 != ch2) {
+                    return false;
+                }
+
+                low++;
+                high--;
             }
         }
 
-        int low=0;
-        int high=sb.length()-1;
-        String orignal=sb.toString();
-
-        while(low<high)
-        {
-            char temp=sb.charAt(low);
-            sb.setCharAt(low,sb.charAt(high));
-            sb.setCharAt(high, temp);
-
-            low++;
-            high--;
-        }
-
-        if(orignal.equals(sb.toString()))
-        {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return true;
     }
 }
